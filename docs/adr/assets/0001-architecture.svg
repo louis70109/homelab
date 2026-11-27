@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 660" role="img" font-family="-apple-system, 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif">
+  <title>air 單機 AI agent home lab 架構</title>
+  <desc>手機 Rex app 經 Tailscale 網卡用 WireGuard 直連 air 的 Rex server；協調伺服器只交換公鑰，打洞失敗時走 DERP 中繼；Discord 經雲端到 air 的 bot，bot 控制 sandbox 裡的三個 pi，TTL 每小時清理。</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="680" height="660" fill="#ffffff"/>
+  <g font-size="14" fill="#2C2C2A">
+    <!-- 手機 -->
+    <rect x="40" y="30" width="600" height="130" rx="20" fill="none" stroke="#888780" stroke-width="0.8" stroke-dasharray="6 4"/>
+    <text x="60" y="58" font-weight="500">手機（4G / Wi-Fi）</text>
+    <rect x="60" y="76" width="170" height="56" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.8"/>
+    <text x="145" y="100" text-anchor="middle" font-weight="500">Rex app</text>
+    <text x="145" y="119" text-anchor="middle" font-size="12" fill="#5F5E5A">看畫面、接手</text>
+    <rect x="255" y="76" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+    <text x="340" y="100" text-anchor="middle" font-weight="500" fill="#085041">Tailscale 網卡</text>
+    <text x="340" y="119" text-anchor="middle" font-size="12" fill="#0F6E56">100.x，只走 tailnet</text>
+    <rect x="450" y="76" width="170" height="56" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.8"/>
+    <text x="535" y="100" text-anchor="middle" font-weight="500">Discord app</text>
+    <text x="535" y="119" text-anchor="middle" font-size="12" fill="#5F5E5A">下指令、收通知</text>
+    <line x1="230" y1="104" x2="253" y2="104" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)"/>
+
+    <!-- 中間層 -->
+    <rect x="40" y="200" width="170" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+    <text x="125" y="224" text-anchor="middle" font-weight="500" fill="#3C3489">協調伺服器</text>
+    <text x="125" y="243" text-anchor="middle" font-size="12" fill="#534AB7">只交換公鑰和位置</text>
+    <rect x="230" y="200" width="170" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+    <text x="315" y="224" text-anchor="middle" font-weight="500" fill="#3C3489">DERP 中繼</text>
+    <text x="315" y="243" text-anchor="middle" font-size="12" fill="#534AB7">打洞失敗才走</text>
+    <rect x="470" y="200" width="170" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+    <text x="555" y="224" text-anchor="middle" font-weight="500" fill="#3C3489">Discord 雲端</text>
+    <text x="555" y="243" text-anchor="middle" font-size="12" fill="#534AB7">bot 主動連出</text>
+
+    <g fill="none">
+      <line x1="275" y1="132" x2="135" y2="198" stroke="#888780" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#a)"/>
+      <line x1="330" y1="132" x2="318" y2="198" stroke="#888780" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#a)"/>
+      <line x1="555" y1="132" x2="555" y2="198" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)"/>
+      <line x1="420" y1="132" x2="420" y2="336" stroke="#1D9E75" stroke-width="2.5" marker-end="url(#a)"/>
+      <line x1="125" y1="256" x2="125" y2="336" stroke="#888780" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#a)"/>
+      <line x1="315" y1="256" x2="315" y2="336" stroke="#888780" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#a)"/>
+      <line x1="555" y1="256" x2="555" y2="336" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)"/>
+    </g>
+
+    <!-- air -->
+    <rect x="40" y="290" width="600" height="300" rx="20" fill="none" stroke="#888780" stroke-width="0.8" stroke-dasharray="6 4"/>
+    <text x="60" y="317" font-weight="500">air（agent 使用者）</text>
+    <rect x="70" y="338" width="360" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+    <text x="250" y="362" text-anchor="middle" font-weight="500" fill="#085041">Rex server</text>
+    <text x="250" y="381" text-anchor="middle" font-size="12" fill="#0F6E56">內建 Tailscale：air-rex</text>
+    <rect x="460" y="338" width="150" height="56" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.8"/>
+    <text x="535" y="362" text-anchor="middle" font-weight="500">Discord bot</text>
+    <text x="535" y="381" text-anchor="middle" font-size="12" fill="#5F5E5A">rex send / capture</text>
+    <line x1="460" y1="366" x2="432" y2="366" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)"/>
+
+    <rect x="70" y="420" width="540" height="100" rx="12" fill="none" stroke="#888780" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="88" y="440" font-size="12" fill="#5F5E5A">sandbox-runtime · session t-時間戳</text>
+    <line x1="250" y1="394" x2="250" y2="418" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect x="95" y="452" width="150" height="52" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.8"/>
+    <text x="170" y="474" text-anchor="middle" font-weight="500" fill="#712B13">pi · main</text>
+    <text x="170" y="493" text-anchor="middle" font-size="12" fill="#993C1D">sonnet:high</text>
+    <rect x="265" y="452" width="150" height="52" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.8"/>
+    <text x="340" y="474" text-anchor="middle" font-weight="500" fill="#712B13">pi · w1</text>
+    <text x="340" y="493" text-anchor="middle" font-size="12" fill="#993C1D">haiku，寫 code</text>
+    <rect x="435" y="452" width="150" height="52" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.8"/>
+    <text x="510" y="474" text-anchor="middle" font-weight="500" fill="#712B13">pi · w2</text>
+    <text x="510" y="493" text-anchor="middle" font-size="12" fill="#993C1D">haiku，測試</text>
+
+    <rect x="70" y="534" width="540" height="40" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.8"/>
+    <text x="340" y="559" text-anchor="middle" font-weight="500">TTL 清理：每小時跑，超過 24 小時就刪</text>
+
+    <!-- 圖例 -->
+    <line x1="60" y1="620" x2="100" y2="620" stroke="#1D9E75" stroke-width="2.5"/>
+    <text x="108" y="624" font-size="12" fill="#5F5E5A">WireGuard 加密直連（資料）</text>
+    <line x1="320" y1="620" x2="360" y2="620" stroke="#888780" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="368" y="624" font-size="12" fill="#5F5E5A">控制訊號 / 中繼備援</text>
+  </g>
+</svg>
